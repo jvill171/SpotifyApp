@@ -1,0 +1,10 @@
+.ImageCard {
+    /* transition: all .5s cubic-bezier(.03,-0.85,1,-1.33); */
+    transition: all 0.5s cubic-bezier(0.23, 2, 0.71, 1.5);
+}
+
+.ImageCard:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #1DB954;
+    transition: all 0.3 ease-out;
+}

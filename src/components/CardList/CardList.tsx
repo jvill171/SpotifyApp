@@ -1,0 +1,776 @@
+import React from 'react';
+import { Box, Grid } from '@mui/material'; // Using Grid for responsiveness
+import ImageCard from '../ImageCard/ImageCard';
+
+import "./CardList.css"
+
+interface SpotifyArtist {
+    external_urls: {
+      spotify: string;
+    };
+    followers: {
+      href: string | null;
+      total: number;
+    };
+    genres: string[];
+    href: string;
+    id: string;
+    images: {
+      height: number;
+      url: string;
+      width: number;
+    }[];
+    name: string;
+    popularity: number;
+    type: string;
+    uri: string;
+}
+  
+// Dummy data to work with for developing the app
+const resp = {
+    "artists": {
+      "href": "https://api.spotify.com/v1/search?query=Mili&type=artist&offset=0&limit=20",
+      "items": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0K05TDnN7xPwIHDOwD2YYs"
+          },
+          "followers": {
+            "href": null,
+            "total": 242583
+          },
+          "genres": [
+            "otacore"
+          ],
+          "href": "https://api.spotify.com/v1/artists/0K05TDnN7xPwIHDOwD2YYs",
+          "id": "0K05TDnN7xPwIHDOwD2YYs",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5ebaabeebac51943424653c45f2",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab67616100005174aabeebac51943424653c45f2",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f178aabeebac51943424653c45f2",
+              "width": 160
+            }
+          ],
+          "name": "I DONT KNOW HOW BUT THEY FOUND ME",
+          "popularity": 57,
+          "type": "artist",
+          "uri": "spotify:artist:0K05TDnN7xPwIHDOwD2YYs"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0K05TDnN7xPwIHDOwD2YYs"
+          },
+          "followers": {
+            "href": null,
+            "total": 242583
+          },
+          "genres": [
+            "otacore"
+          ],
+          "href": "https://api.spotify.com/v1/artists/0K05TDnN7xPwIHDOwD2YYs",
+          "id": "0K05TDnN7xPwIHDOwD2YYs",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5ebaabeebac51943424653c45f2",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab67616100005174aabeebac51943424653c45f2",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f178aabeebac51943424653c45f2",
+              "width": 160
+            }
+          ],
+          "name": "Mili",
+          "popularity": 57,
+          "type": "artist",
+          "uri": "spotify:artist:0K05TDnN7xPwIHDOwD2YYs"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/4us4NMG5wuqdUZvthZrj0Q"
+          },
+          "followers": {
+            "href": null,
+            "total": 36767
+          },
+          "genres": [
+            "5th wave emo",
+            "california hardcore",
+            "modern melodic hardcore"
+          ],
+          "href": "https://api.spotify.com/v1/artists/4us4NMG5wuqdUZvthZrj0Q",
+          "id": "4us4NMG5wuqdUZvthZrj0Q",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5eb5475238e8f6d1af5428e8e89",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab676161000051745475238e8f6d1af5428e8e89",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f1785475238e8f6d1af5428e8e89",
+              "width": 160
+            }
+          ],
+          "name": "Militarie Gun",
+          "popularity": 42,
+          "type": "artist",
+          "uri": "spotify:artist:4us4NMG5wuqdUZvthZrj0Q"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/4oa7ETNZH1ivfzFkCGVZlR"
+          },
+          "followers": {
+            "href": null,
+            "total": 2784400
+          },
+          "genres": [
+            "sertanejo",
+            "sertanejo tradicional",
+            "sertanejo universitario"
+          ],
+          "href": "https://api.spotify.com/v1/artists/4oa7ETNZH1ivfzFkCGVZlR",
+          "id": "4oa7ETNZH1ivfzFkCGVZlR",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5eb26c5c8d56a8979c644f37de7",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab6761610000517426c5c8d56a8979c644f37de7",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f17826c5c8d56a8979c644f37de7",
+              "width": 160
+            }
+          ],
+          "name": "Milionário & José Rico",
+          "popularity": 64,
+          "type": "artist",
+          "uri": "spotify:artist:4oa7ETNZH1ivfzFkCGVZlR"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6Dfji9ASsLF7FALyFtUaSi"
+          },
+          "followers": {
+            "href": null,
+            "total": 14602
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/6Dfji9ASsLF7FALyFtUaSi",
+          "id": "6Dfji9ASsLF7FALyFtUaSi",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5eba0045154cca04a4a82dda66b",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab67616100005174a0045154cca04a4a82dda66b",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f178a0045154cca04a4a82dda66b",
+              "width": 160
+            }
+          ],
+          "name": "Milicia Del Rancho",
+          "popularity": 39,
+          "type": "artist",
+          "uri": "spotify:artist:6Dfji9ASsLF7FALyFtUaSi"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/7wfMF7uhijiZuT7QuXySP7"
+          },
+          "followers": {
+            "href": null,
+            "total": 1170206
+          },
+          "genres": [
+            "forro",
+            "vaqueiro"
+          ],
+          "href": "https://api.spotify.com/v1/artists/7wfMF7uhijiZuT7QuXySP7",
+          "id": "7wfMF7uhijiZuT7QuXySP7",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5ebd1f77311b120449901a17a18",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab67616100005174d1f77311b120449901a17a18",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f178d1f77311b120449901a17a18",
+              "width": 160
+            }
+          ],
+          "name": "Thullio Milionário",
+          "popularity": 62,
+          "type": "artist",
+          "uri": "spotify:artist:7wfMF7uhijiZuT7QuXySP7"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/1eVPKI2R4NlX6P5FIuMXis"
+          },
+          "followers": {
+            "href": null,
+            "total": 342647
+          },
+          "genres": [
+            "t-pop",
+            "thai hip hop",
+            "thai trap"
+          ],
+          "href": "https://api.spotify.com/v1/artists/1eVPKI2R4NlX6P5FIuMXis",
+          "id": "1eVPKI2R4NlX6P5FIuMXis",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5eb07450de0d2904419d8ae485f",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab6761610000517407450de0d2904419d8ae485f",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f17807450de0d2904419d8ae485f",
+              "width": 160
+            }
+          ],
+          "name": "MILLI",
+          "popularity": 51,
+          "type": "artist",
+          "uri": "spotify:artist:1eVPKI2R4NlX6P5FIuMXis"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/4eAOcbAXIF4BmbN6E1QIlw"
+          },
+          "followers": {
+            "href": null,
+            "total": 1382006
+          },
+          "genres": [
+            "dance pop",
+            "hip pop",
+            "r&b",
+            "urban contemporary"
+          ],
+          "href": "https://api.spotify.com/v1/artists/4eAOcbAXIF4BmbN6E1QIlw",
+          "id": "4eAOcbAXIF4BmbN6E1QIlw",
+          "images": [
+            {
+              "height": 793,
+              "url": "https://i.scdn.co/image/f5463b27334e1743de80eb8f94aa4864c1e95aad",
+              "width": 1000
+            },
+            {
+              "height": 507,
+              "url": "https://i.scdn.co/image/20908891193078a32950826f526e9daa28d5520d",
+              "width": 639
+            },
+            {
+              "height": 159,
+              "url": "https://i.scdn.co/image/ecbaa108f4bad0a3437df69dbb66d6e6b17a5f0b",
+              "width": 200
+            },
+            {
+              "height": 51,
+              "url": "https://i.scdn.co/image/1aeec2598f356b28f8395bf105b0bafd8ae1987c",
+              "width": 64
+            }
+          ],
+          "name": "Christina Milian",
+          "popularity": 50,
+          "type": "artist",
+          "uri": "spotify:artist:4eAOcbAXIF4BmbN6E1QIlw"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/1j6koOpTHnrf3MMIn9cKHm"
+          },
+          "followers": {
+            "href": null,
+            "total": 1884
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/1j6koOpTHnrf3MMIn9cKHm",
+          "id": "1j6koOpTHnrf3MMIn9cKHm",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5ebc1d648a5f1bf6839106de412",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab67616100005174c1d648a5f1bf6839106de412",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f178c1d648a5f1bf6839106de412",
+              "width": 160
+            }
+          ],
+          "name": "Mili",
+          "popularity": 24,
+          "type": "artist",
+          "uri": "spotify:artist:1j6koOpTHnrf3MMIn9cKHm"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0vsqfzyjxEh3tU5l7q2Enb"
+          },
+          "followers": {
+            "href": null,
+            "total": 2490
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/0vsqfzyjxEh3tU5l7q2Enb",
+          "id": "0vsqfzyjxEh3tU5l7q2Enb",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2731df17e6c19cf2b033e9a3644",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e021df17e6c19cf2b033e9a3644",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048518b5611046ce86b26b33a64e9",
+              "width": 64
+            }
+          ],
+          "name": "Milira",
+          "popularity": 19,
+          "type": "artist",
+          "uri": "spotify:artist:0vsqfzyjxEh3tU5l7q2Enb"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/5OLnS51jcpqSZjRxC14sHd"
+          },
+          "followers": {
+            "href": null,
+            "total": 177864
+          },
+          "genres": [
+            "balkan trap",
+            "turbo folk"
+          ],
+          "href": "https://api.spotify.com/v1/artists/5OLnS51jcpqSZjRxC14sHd",
+          "id": "5OLnS51jcpqSZjRxC14sHd",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273de4e6340cf44b3c9918c4f9a",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02e24cf4c8898962ac55e11ed5",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851de4e6340cf44b3c9918c4f9a",
+              "width": 64
+            }
+          ],
+          "name": "Mili",
+          "popularity": 45,
+          "type": "artist",
+          "uri": "spotify:artist:5OLnS51jcpqSZjRxC14sHd"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2owjgBZQ70LoCNHIgW3gSk"
+          },
+          "followers": {
+            "href": null,
+            "total": 301256
+          },
+          "genres": [
+            "classic bollywood",
+            "filmi"
+          ],
+          "href": "https://api.spotify.com/v1/artists/2owjgBZQ70LoCNHIgW3gSk",
+          "id": "2owjgBZQ70LoCNHIgW3gSk",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273fb7eb3e6920a371e7d8278d8",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02fb7eb3e6920a371e7d8278d8",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851fb7eb3e6920a371e7d8278d8",
+              "width": 64
+            }
+          ],
+          "name": "Anand-Milind",
+          "popularity": 50,
+          "type": "artist",
+          "uri": "spotify:artist:2owjgBZQ70LoCNHIgW3gSk"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0rbryvz9Hy3kuvW5krvKXR"
+          },
+          "followers": {
+            "href": null,
+            "total": 378
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/0rbryvz9Hy3kuvW5krvKXR",
+          "id": "0rbryvz9Hy3kuvW5krvKXR",
+          "images": [
+          ],
+          "name": "Mili",
+          "popularity": 10,
+          "type": "artist",
+          "uri": "spotify:artist:0rbryvz9Hy3kuvW5krvKXR"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/29D4iRqjepAsZt6o5hccND"
+          },
+          "followers": {
+            "href": null,
+            "total": 545358
+          },
+          "genres": [
+            "anime",
+            "j-pop",
+            "japanese r&b"
+          ],
+          "href": "https://api.spotify.com/v1/artists/29D4iRqjepAsZt6o5hccND",
+          "id": "29D4iRqjepAsZt6o5hccND",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5ebd88f114900efdbf936ab3bc4",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab67616100005174d88f114900efdbf936ab3bc4",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f178d88f114900efdbf936ab3bc4",
+              "width": 160
+            }
+          ],
+          "name": "Miliyah",
+          "popularity": 52,
+          "type": "artist",
+          "uri": "spotify:artist:29D4iRqjepAsZt6o5hccND"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0hlQiKT1UeLxCKe4W5Cd23"
+          },
+          "followers": {
+            "href": null,
+            "total": 22
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/0hlQiKT1UeLxCKe4W5Cd23",
+          "id": "0hlQiKT1UeLxCKe4W5Cd23",
+          "images": [
+          ],
+          "name": "Mili",
+          "popularity": 7,
+          "type": "artist",
+          "uri": "spotify:artist:0hlQiKT1UeLxCKe4W5Cd23"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3Sf5uoWCOfrlpJYunDGw2G"
+          },
+          "followers": {
+            "href": null,
+            "total": 186187
+          },
+          "genres": [
+            "turbo folk"
+          ],
+          "href": "https://api.spotify.com/v1/artists/3Sf5uoWCOfrlpJYunDGw2G",
+          "id": "3Sf5uoWCOfrlpJYunDGw2G",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5eb4860a863453c60eba0afc685",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab676161000051744860a863453c60eba0afc685",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f1784860a863453c60eba0afc685",
+              "width": 160
+            }
+          ],
+          "name": "Milica Pavlović",
+          "popularity": 50,
+          "type": "artist",
+          "uri": "spotify:artist:3Sf5uoWCOfrlpJYunDGw2G"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/17j05v7XNwaG0YvWLpPR9l"
+          },
+          "followers": {
+            "href": null,
+            "total": 138
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/17j05v7XNwaG0YvWLpPR9l",
+          "id": "17j05v7XNwaG0YvWLpPR9l",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5eb07ad31edf38cee6c150c55d5",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab6761610000517407ad31edf38cee6c150c55d5",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f17807ad31edf38cee6c150c55d5",
+              "width": 160
+            }
+          ],
+          "name": "Mili",
+          "popularity": 2,
+          "type": "artist",
+          "uri": "spotify:artist:17j05v7XNwaG0YvWLpPR9l"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/5712Xu1mDKhFA3aycXnBmP"
+          },
+          "followers": {
+            "href": null,
+            "total": 12782
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/5712Xu1mDKhFA3aycXnBmP",
+          "id": "5712Xu1mDKhFA3aycXnBmP",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5ebde65184ceebb87fc8dad2b88",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab67616100005174de65184ceebb87fc8dad2b88",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f178de65184ceebb87fc8dad2b88",
+              "width": 160
+            }
+          ],
+          "name": "Conservative Military Image",
+          "popularity": 36,
+          "type": "artist",
+          "uri": "spotify:artist:5712Xu1mDKhFA3aycXnBmP"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2sRFhA4rI9ZZmk8j0sLuGV"
+          },
+          "followers": {
+            "href": null,
+            "total": 10
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/2sRFhA4rI9ZZmk8j0sLuGV",
+          "id": "2sRFhA4rI9ZZmk8j0sLuGV",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273c45f3b6cd7c281b8a06e3f64",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02c45f3b6cd7c281b8a06e3f64",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851c45f3b6cd7c281b8a06e3f64",
+              "width": 64
+            }
+          ],
+          "name": "Mili",
+          "popularity": 0,
+          "type": "artist",
+          "uri": "spotify:artist:2sRFhA4rI9ZZmk8j0sLuGV"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6Av9ydTG5mIgNRliPAJebb"
+          },
+          "followers": {
+            "href": null,
+            "total": 891
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/6Av9ydTG5mIgNRliPAJebb",
+          "id": "6Av9ydTG5mIgNRliPAJebb",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273e271d0e4cda16325aeb44000",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02e271d0e4cda16325aeb44000",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851e271d0e4cda16325aeb44000",
+              "width": 64
+            }
+          ],
+          "name": "Milicia",
+          "popularity": 42,
+          "type": "artist",
+          "uri": "spotify:artist:6Av9ydTG5mIgNRliPAJebb"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2FS4FG8tGAyX7dC23A1VIr"
+          },
+          "followers": {
+            "href": null,
+            "total": 33
+          },
+          "genres": [
+          ],
+          "href": "https://api.spotify.com/v1/artists/2FS4FG8tGAyX7dC23A1VIr",
+          "id": "2FS4FG8tGAyX7dC23A1VIr",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2733136e0f514f0b5a372071f72",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e023136e0f514f0b5a372071f72",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048513136e0f514f0b5a372071f72",
+              "width": 64
+            }
+          ],
+          "name": "Mili",
+          "popularity": 0,
+          "type": "artist",
+          "uri": "spotify:artist:2FS4FG8tGAyX7dC23A1VIr"
+        }
+      ],
+      "limit": 20,
+      "next": "https://api.spotify.com/v1/search?query=Mili&type=artist&offset=20&limit=20",
+      "offset": 0,
+      "previous": null,
+      "total": 116
+    }
+  }
+
+
+const CardList: React.FC = () => {
+  return (
+    <Box sx={{ flexGrow: 1, padding: 2 }}>
+      <Grid container spacing={3}>
+        {resp.artists.items.map((artist: SpotifyArtist) => (
+          <Grid item xs={6} sm={6} md={3} lg={2.4} key={artist.id}>
+            <ImageCard
+              cardImg={artist.images[0]?.url}
+              textContent={artist.name}
+              clickLink={artist.external_urls.spotify}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
+};
+
+export default CardList;
