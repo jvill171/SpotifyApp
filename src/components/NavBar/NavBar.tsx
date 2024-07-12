@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
+// TODO: Everything about the NavBar. This is only a placeholder for now
 const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1}}>
