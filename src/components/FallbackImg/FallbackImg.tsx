@@ -13,9 +13,9 @@ const FallbackImg: React.FC<FallbackImgProps> = ({ src, fallbackComponent, fallb
   return(
     <div className={className} style={fallbackStyles}>
     {fallbackComponent ? (
-        <>{fallbackComponent}</>
+        <div style={{height: "100%", width: "100%"}}>{fallbackComponent}</div>
     ) : src ? (
-        <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: "fill" }} />
+        <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: "contain" }} />
     ) :
       <p>No fallback image found</p>  // Should only ever appear in development, unless something went horribly wrong
     }
